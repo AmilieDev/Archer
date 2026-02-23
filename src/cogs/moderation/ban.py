@@ -36,8 +36,8 @@ class BanCog(fluxer.Cog):
           
         for member_id in member_ids:  
             try:  
-                await guild.ban(user_id=member_id, reason=reason)  
-                banned_count += 1  
+                await guild.ban(user_id=member_id, reason=reason)
+                banned_count += 1
                 if DEBUG == 1:  
                     print(f"[DEBUG] Ban command operated on {member_id}")
             except Exception as e:  

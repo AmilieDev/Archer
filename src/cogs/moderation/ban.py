@@ -13,7 +13,10 @@ class BanCog(fluxer.Cog):
         super().__init__(bot)
 
     @fluxer.Cog.command(name="ban")  
-    async def ban(self, ctx, *member_ids: int, reason: str):  
+    async def ban(self, ctx, *, args: str):
+        parts = args.split(" -r ")
+        member_ids = [int(x.strip()) for x in parts[0].split()]
+        reason = parts[1].strip() if len(parts) > 1 else "No reason provided"
         guild = await self.bot.fetch_guild(ctx.guild_id) 
         
         if not guild:  
@@ -35,6 +38,8 @@ class BanCog(fluxer.Cog):
             try:  
                 await guild.ban(user_id=member_id, reason=reason)  
                 banned_count += 1  
+                if DEBUG == 1:  
+                    print(f"[DEBUG] Ban command operated on {member_id}")
             except Exception as e:  
                 failed_bans.append(f"{member_id} ({str(e)})")  
     
@@ -50,8 +55,6 @@ class BanCog(fluxer.Cog):
             if failed_bans:  
                 await ctx.reply(f"Failed to ban: {', '.join(failed_bans)}")  
 
-        if DEBUG == 1:  
-            print(f"[DEBUG] Ban command operated on {member_id}")
         
 async def setup(bot):
     await bot.add_cog(BanCog(bot))

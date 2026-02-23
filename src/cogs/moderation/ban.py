@@ -13,13 +13,12 @@ class BanCog(fluxer.Cog):
         super().__init__(bot)
 
     @fluxer.Cog.command(name="ban")  
-    async def ban(self, ctx, member_id: int, *, reason: str):  
+    async def ban(self, ctx, *member_ids: int, *, reason: str):  
         guild = await self.bot.fetch_guild(ctx.guild_id) 
         
         if not guild:  
             return await ctx.reply("This command hasn't been run in a guild, how are you using this bot?")  
-        await guild.ban(user_id=member_id, reason=reason)  
-
+        
         # Permission gating, only mods can use this command.
         author_id = getattr(ctx.author, "user", ctx.author).id  
 
@@ -28,14 +27,28 @@ class BanCog(fluxer.Cog):
             await ctx.reply("Oops! You do not have permission to use that command.")  
             print("[WARNING] Someone without the mod role tried to use the ban command!")  
             return  
+        
+        banned_count = 0  
+        failed_bans = []  
+          
+        for member_id in member_ids:  
+            try:  
+                await guild.ban(user_id=member_id, reason=reason)  
+                banned_count += 1  
+            except Exception as e:  
+                failed_bans.append(f"{member_id} ({str(e)})")  
     
-        bannedEmbed = Embed(  
-            title = f"Banned {member_id}",  
-            description = f"This member has been banned for: {reason}",  
-            color=0x65b7e6  
-        )  
-    
-        await ctx.reply(embed=bannedEmbed)
+        # Create response embed  
+        if banned_count > 0:  
+            bannedEmbed = Embed(  
+                title=f"Banned {banned_count} member{'s' if banned_count > 1 else ''}",  
+                description=f"Banned IDs: {', '.join(map(str, member_ids))}\nReason: {reason}",  
+                color=0x65b7e6  
+            )  
+            await ctx.reply(embed=bannedEmbed)
+
+            if failed_bans:  
+                await ctx.reply(f"Failed to ban: {', '.join(failed_bans)}")  
 
         if DEBUG == 1:  
             print(f"[DEBUG] Ban command operated on {member_id}")

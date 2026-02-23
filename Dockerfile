@@ -9,6 +9,5 @@ COPY requirements.txt .
 RUN uv venv && uv pip install -r requirements.txt
 
 COPY src/ ./src/
-COPY .env .env
 
 CMD ["uv", "run", "python", "-u", "src/main.py"]

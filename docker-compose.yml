@@ -3,7 +3,55 @@ services:
   archer:
     build: .
     working_dir: /app
-    env_file:
-      - .env
     restart: unless-stopped
+    environment:
+      # Set this to true if you want to configure using the docker-compose deployment method
+      DOCKER_DEPLOY: false
+      # Set the bot to debug mode or disable it
+      # Use 1 for true or 0 for false
+      # This can flood terminals, but isn't an issue if you run the container detached
+      BOT_DEBUG_MODE: 0
+      # Set this to your guild admins ID, this is necessary for MANY commands such as roleall.
+      ADMIN_ID: "INSERT ADMIN ID HERE"
+      # This mod role will allow mods to run $purge, ban, kick etc.
+      MOD_ROLE: "INSERT MOD ROLE HERE"
+      # Input the ID for your logs channel, this is where ban / kick / timeout logs will be dropped into.
+      LOGS_CHANNEL: "INSERT LOGS CHANNEL HERE"
+      # These intents can be modified if you plan on modifying what this bot can do
+      # Or extending it, I recommend not touching these if you don't know what you are doing though!
+      #Use bitwise intents or else the bot will not be able to talk with Fluxer properly.
+      # You can find an appropriate calculation in the README.md
+      FLUXER_INTENTS: "33281"
+      # Default bot prefix used for calling the bot for example in "$ping".
+      # This should be safe to modify, if anything breaks though, make a GitHub issue.
+      BOT_PREFIX: "$"
+      # GuildID is the ID the bot will use for where it is running, for example - you input your guild ID
+      # And the bot will be tailored towards that guild, there will be no conflict.
+      GUILD_ID: "INSERT GUILD ID HERE"
+      # AutoroleID is the ID used for autorolling members on join and giving them a role. This cog
+      # Can be disabled with the value AUTOROLECOG_DISABLE in this config.
+      AUTOROLE_ID: "INSERT AUTOROLE ID HERE"
+      AUTOROLECOG_DISABLE: 0
 
+    # TODO once permanent storage comes into play,
+    # https://docs.docker.com/engine/storage/bind-mounts/
+    # binds volume inside the docker container to a external
+    # bare metal volume.
+    # FORMAT: /path_on_host:/path_inside_container
+    # volumes:
+    # Alternatively pass in just a volume name, and docker will
+    # create it's own managed volume. This is harder to accidentally
+    # delete, but it'll make editing the file harder
+    #  - src/data:/app/archer_data
+
+    # see root secrets below.
+    secrets:
+      - FLUXER_BOT_TOKEN
+
+# More secure way of passing the bot token to
+# the docker container. requires the token to be
+# set in a text file in the root directory.
+# https://docs.docker.com/compose/how-tos/use-secrets/
+secrets:
+  FLUXER_BOT_TOKEN:
+    file: ./bot_token.txt

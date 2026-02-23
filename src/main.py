@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 import fluxer
 import os
 
-# Initialise .env > You bot token should be in this virtual environment.
-load_dotenv()
+# Initialise .env > You bot token should be in this virtual environment unless
+# you're using docker-deploy. In which case paste the token in bot_token.txt!
+if not os.getenv('DOCKER_DEPLOY'):
+    load_dotenv()
 
 INTENTS = os.getenv("FLUXER_INTENTS")
 PREFIX = os.getenv("BOT_PREFIX")
@@ -39,5 +41,10 @@ if __name__ == "__main__":
     # NEVER, EVER, EVER UNDER ANY CIRCUMSTANCES PUT YOUR TOKEN HERE.
     # PUT YOUR TOKEN IN .ENV IN THE PROJECT ROOT.
     # THANK YOU.
-    TOKEN = os.getenv('FLUXER_BOT_TOKEN')
+    if not os.getenv('DOCKER_DEPLOY'):
+        TOKEN = os.getenv('FLUXER_BOT_TOKEN')
+    else:
+        with open("/run/secrets/FLUXER_BOT_TOKEN") as f:
+            TOKEN = f.read().strip()
+
     bot.run(TOKEN)

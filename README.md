@@ -21,12 +21,16 @@ Archer currently supports **Unix-based systems** (macOS, Linux, FreeBSD). Make s
 First, install docker and docker-compose with your package manager of choice, eg.:
 ```pacman -S docker docker-compose```
 
-Then, you'll want to edit your .env.example and save it as .env (Remove the .example!) with a text editor of choice (VSCode, Nano, NVim, etc.)
+Then, you'll want to edit the ```docker-compose.yml``` file to set all of the enviroment variables needed to run the bot **except the bot token**. The bot token for safety reasons is stored using a docker secret, which pulls the token from ```bot_token.txt```. Make sure to copy the bot token there. <br>
+If you'd rather have the bot pull everything from the .env.example file, you can set the ```DOCKER_DEPLOY``` variable to False. However this is **not** recommened for docker compose deployments. <br>
+(If you do end up doing it, make sure to remove the .example from the env file!)
 
 And finally, to start your bot use
 ```sudo docker-compose up --build```<br>
 If you do not want to use sudo you can also add your user to the docker group and run
-```docker-compose up --build```
+```docker-compose up --build``` <br>
+You can also run the container detached from your shell by running <br>
+```docker-compose up -d --build```
 
 Any changes will require you to use the above rebuild command, if you haven't made a change, but want to start your bot again - simply omit the --build part of the command.
 

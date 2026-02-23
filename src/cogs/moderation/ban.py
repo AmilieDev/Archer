@@ -13,7 +13,7 @@ class BanCog(fluxer.Cog):
         super().__init__(bot)
 
     @fluxer.Cog.command(name="ban")  
-    async def ban(self, ctx, *member_ids: int, *, reason: str):  
+    async def ban(self, ctx, *member_ids: int, reason: str):  
         guild = await self.bot.fetch_guild(ctx.guild_id) 
         
         if not guild:  

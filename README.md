@@ -16,8 +16,6 @@ Archer is a free, open-source, and self-hostable utility bot for [Fluxer](https:
 
 ## Getting Started
 
-Archer currently supports **Unix-based systems** (macOS, Linux, FreeBSD). Make sure you have the required dependencies installed before proceeding.
-
 First, install docker and docker-compose with your package manager of choice, eg.:
 ```pacman -S docker docker-compose```
 
@@ -40,7 +38,7 @@ Enjoy!
 
 ## Gateway Intents
 
-When connecting to the Fluxer API/Gateway, you'll need to specify your intents as a bitfield. Set this value in your `.env` file.
+When connecting to the Fluxer API/Gateway, you'll need to specify your intents as a bitfield. Set this value in your `docker-compose.yml` file.
 
 To calculate your intent value, add up the values for each intent you want to enable.
 

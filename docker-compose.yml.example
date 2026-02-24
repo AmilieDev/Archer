@@ -1,4 +1,3 @@
-
 # docker-compose.yml
 services:
   archer:
@@ -13,11 +12,11 @@ services:
       # This can flood terminals, but isn't an issue if you run the container detached
       BOT_DEBUG_MODE: 0
       # Set this to your guild admins ID, this is necessary for MANY commands such as roleall.
-      ADMIN_ID: "1473331082336444455"
+      ADMIN_ID: "ID here"
       # This mod role will allow mods to run $purge, ban, kick etc.
-      MOD_ROLE: "1473752659813564470"
+      MOD_ROLE: "ID here"
       # Input the ID for your logs channel, this is where ban / kick / timeout logs will be dropped into.
-      LOGS_CHANNEL: "1475176948234421468"
+      LOGS_CHANNEL: "ID here"
       # These intents can be modified if you plan on modifying what this bot can do
       # Or extending it, I recommend not touching these if you don't know what you are doing though!
       #Use bitwise intents or else the bot will not be able to talk with Fluxer properly.
@@ -28,7 +27,7 @@ services:
       BOT_PREFIX: "$$"
       # GuildID is the ID the bot will use for where it is running, for example - you input your guild ID
       # And the bot will be tailored towards that guild, there will be no conflict.
-      GUILD_ID: "1473331137336340540"
+      GUILD_ID: "ID here"
       # AutoroleID is the ID used for autorolling members on join and giving them a role. This cog
       # Can be disabled with the value AUTOROLECOG_DISABLE in this config.
       AUTOROLE_ID: "INSERT AUTOROLE ID HERE"

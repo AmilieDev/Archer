@@ -2,7 +2,6 @@ import fluxer
 import os
 from pathlib import Path
 import shutil
-import fluxer
 from fluxer.models import Embed
 import asyncio
 

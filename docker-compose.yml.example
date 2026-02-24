@@ -6,17 +6,17 @@ services:
     restart: unless-stopped
     environment:
       # Set this to true if you want to configure using the docker-compose deployment method
-      DOCKER_DEPLOY: false
+      DOCKER_DEPLOY: "false"
       # Set the bot to debug mode or disable it
       # Use 1 for true or 0 for false
       # This can flood terminals, but isn't an issue if you run the container detached
       BOT_DEBUG_MODE: 0
       # Set this to your guild admins ID, this is necessary for MANY commands such as roleall.
-      ADMIN_ID: "INSERT ADMIN ID HERE"
+      ADMIN_ID: "ID here"
       # This mod role will allow mods to run $purge, ban, kick etc.
-      MOD_ROLE: "INSERT MOD ROLE HERE"
+      MOD_ROLE: "ID here"
       # Input the ID for your logs channel, this is where ban / kick / timeout logs will be dropped into.
-      LOGS_CHANNEL: "INSERT LOGS CHANNEL HERE"
+      LOGS_CHANNEL: "ID here"
       # These intents can be modified if you plan on modifying what this bot can do
       # Or extending it, I recommend not touching these if you don't know what you are doing though!
       #Use bitwise intents or else the bot will not be able to talk with Fluxer properly.
@@ -24,10 +24,10 @@ services:
       FLUXER_INTENTS: "33281"
       # Default bot prefix used for calling the bot for example in "$ping".
       # This should be safe to modify, if anything breaks though, make a GitHub issue.
-      BOT_PREFIX: "$"
+      BOT_PREFIX: "$$"
       # GuildID is the ID the bot will use for where it is running, for example - you input your guild ID
       # And the bot will be tailored towards that guild, there will be no conflict.
-      GUILD_ID: "INSERT GUILD ID HERE"
+      GUILD_ID: "ID here"
       # AutoroleID is the ID used for autorolling members on join and giving them a role. This cog
       # Can be disabled with the value AUTOROLECOG_DISABLE in this config.
       AUTOROLE_ID: "INSERT AUTOROLE ID HERE"

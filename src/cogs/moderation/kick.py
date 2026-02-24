@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 from fluxer.models import Embed
 
 # Global values gathered from .env, do not modify.
-GUILD_ID = int(os.getenv("GUILD_ID"))
-DEBUG = int(os.getenv("BOT_DEBUG_MODE"))
-MOD_ROLE = int(os.getenv("MOD_ROLE"))
+GUILD_ID = int(os.getenv("GUILD_ID", "0"))
+DEBUG = int(os.getenv("BOT_DEBUG_MODE", "0"))
+MOD_ROLE = int(os.getenv("MOD_ROLE", "0"))
 
 class KickCog(fluxer.Cog):
     def __init__(self, bot):
@@ -38,6 +38,16 @@ class KickCog(fluxer.Cog):
         )
 
         await ctx.reply(embed=kickedEmbed)  
+
+        logger = self.bot.cogs.get("LoggerCog")
+        if logger:
+            await logger.send_signal(
+                logger.SignalCategory.MODERATION,
+                logger.ModerationSignal.BAN,
+                moderator=ctx.author,
+                target=member,
+                reason=reason
+            )
 
         if DEBUG == 1:
             print(f"[DEBUG] Kick command operated on {member_id}")

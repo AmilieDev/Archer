@@ -2,14 +2,13 @@ import fluxer
 import os
 from pathlib import Path
 import shutil
-import fluxer
 from fluxer.models import Embed
 import asyncio
 
 REPO_URL= os.getenv("REPO_URL")
 TEMP_DIR= Path("/tmp/archer")
 LOCAL_COGS_DIR = Path("./src/cogs")
-ADMIN_ID = int(os.getenv("ADMIN_ID"))  
+ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))  
 
 class UpdateCog(fluxer.Cog):
     def __init__(self, bot):

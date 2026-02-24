@@ -1,12 +1,12 @@
 import fluxer
 import os
-from dotenv import load_dotenv
 from fluxer.models import Embed
+import logging
 
 # Global values gathered from .env, do not modify.
-GUILD_ID = int(os.getenv("GUILD_ID"))
-DEBUG = int(os.getenv("BOT_DEBUG_MODE"))
-MOD_ROLE = int(os.getenv("MOD_ROLE"))
+GUILD_ID = int(os.getenv("GUILD_ID", "0"))
+DEBUG = int(os.getenv("BOT_DEBUG_MODE", "0"))
+MOD_ROLE = int(os.getenv("MOD_ROLE", "0"))
 
 class BanCog(fluxer.Cog):
     def __init__(self, bot):
@@ -54,7 +54,6 @@ class BanCog(fluxer.Cog):
 
             if failed_bans:  
                 await ctx.reply(f"Failed to ban: {', '.join(failed_bans)}")  
-
         
 async def setup(bot):
     await bot.add_cog(BanCog(bot))

@@ -5,9 +5,9 @@ from fluxer.models import Embed
 from datetime import datetime, timedelta  
 
 # Global values gathered from .env, do not modify.
-GUILD_ID = int(os.getenv("GUILD_ID"))
-DEBUG = int(os.getenv("BOT_DEBUG_MODE"))
-MOD_ROLE = int(os.getenv("MOD_ROLE"))
+GUILD_ID = int(os.getenv("GUILD_ID", "0"))
+DEBUG = int(os.getenv("BOT_DEBUG_MODE", "0"))
+MOD_ROLE = int(os.getenv("MOD_ROLE", "0"))
 
 # TIme parsing, for date & time in timeout, max 14d.
 def parse_duration(duration: str) -> datetime:  

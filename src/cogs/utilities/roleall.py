@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 import asyncio
 
 # Global values gathered from .env, do not modify.
-GUILD_ID = int(os.getenv("GUILD_ID"))
-ADMIN_ID = int(os.getenv("ADMIN_ID"))  
+GUILD_ID = int(os.getenv("GUILD_ID", "0"))
+ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))  
 
 class RoleallCog(fluxer.Cog):
     def __init__(self, bot):

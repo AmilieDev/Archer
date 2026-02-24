@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 # Global values gathered from .env, do not modify.
-GUILD_ID = int(os.getenv("GUILD_ID"))
+GUILD_ID = int(os.getenv("GUILD_ID", "0"))
 
 class MembersCog(fluxer.Cog):
     def __init__(self, bot):

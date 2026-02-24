@@ -12,7 +12,7 @@ if not os.getenv('DOCKER_DEPLOY'):
 
 INTENTS = os.getenv("FLUXER_INTENTS")
 PREFIX = os.getenv("BOT_PREFIX")
-DEBUG = int(os.getenv("BOT_DEBUG_MODE"))
+DEBUG = int(os.getenv("BOT_DEBUG_MODE", "0"))
 
 bot = fluxer.Bot(command_prefix=PREFIX, intents=INTENTS)
 

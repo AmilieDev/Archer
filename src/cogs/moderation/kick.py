@@ -19,7 +19,7 @@ class KickCog(fluxer.Cog):
         guild = await self.bot.fetch_guild(ctx.guild_id)  
 
         if not guild:
-            return await ctx.reply("This command hasn't been run in a guild, how are you using this bot?")
+            return ctx.reply("This command hasn't been run in a guild, how are you using this bot?")
         await guild.kick(user_id=member_id, reason=reason)
 
         # Permission gating, only mods can use this command.

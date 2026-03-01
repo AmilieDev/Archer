@@ -8,3 +8,7 @@ __pycache__/
 /venv
 /.venv
 /.vscode
+
+docker-compose.yml
+bot_token.txt
+bot_token.txt

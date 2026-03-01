@@ -22,7 +22,7 @@ class RoleallCog(fluxer.Cog):
         
         guild = self.bot._guilds.get(GUILD_ID)
 
-        await ctx.reply("Assigning role to all users {role_id}")
+        await ctx.reply(f"Assigning role to all users {role_id}")
 
         count = 0
         after = None
@@ -31,22 +31,22 @@ class RoleallCog(fluxer.Cog):
             if not members:
                 break
 
-            for member in members:
-                try:
-                    if role_id in [r.id for r in member.roles]:
-                        continue
-
-                    await member.add_role(role_id=role_id, guild_id=GUILD_ID, reason="Roleall Command")
-                    count += 1
-
-                    # This should shut up ratelimits.
-                    await asyncio.sleep(0.6)
-
-                except Exception as e:
+            for member in members:  
+                try:  
+                    if role_id in member.roles:  
+                        continue  
+            
+                    await member.add_role(role_id=role_id, reason="Roleall Command")  
+                    count += 1  
+            
+                    # This should shut up ratelimits.  
+                    await asyncio.sleep(0.6)  
+            
+                except Exception as e:  
                     print(f"[FAIL] Failed to add role to {member.user.id}")
 
-                after = members[-1].user.id if members else None
-
+            after = members[-1].user.id if members else None
+            
         await ctx.reply(f"Added {role_id} to {count} members!")
 
 async def setup(bot):

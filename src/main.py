@@ -30,9 +30,13 @@ async def load_extensions():
                 cog = path.lstrip("./").replace(os.sep, ".")[:-3]
                 cog = cog.removeprefix("src.")
                 try:
-                    await bot.load_extension(cog)
-                    if DEBUG == 1:
-                        print(f"[DEBUG] Loaded {cog}")
+                    if bot.get_cog(cog):
+                        print(f"[ERROR] Cog {cog} is already loaded!")
+                        continue
+                    else:
+                        await bot.load_extension(cog)
+                        if DEBUG == 1:
+                            print(f"[DEBUG] Loaded {cog}")
                 except Exception as e:
                     print(f"[ERROR] Failed to load {cog}: {e}")
 
